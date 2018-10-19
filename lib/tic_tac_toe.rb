@@ -31,49 +31,49 @@ def move(index, token = "X")
   @board[index] = token
 end
 
-def position_taken?(board, location)
-  board[location] != " " && board[location] != ""
+def position_taken?(location)
+  @board[location] != " " && @board[location] != ""
 end
 
-def valid_move?(board, index)
-  index.between?(0,8) && !position_taken?(board, index)
+def valid_move?(index)
+  index.between?(0,8) && !position_taken?(@board, index)  
 end
 
-def turn(board)
+def turn
   puts "Please enter 1-9:"
   user_input = gets.strip
   index = input_to_index(user_input)
-  if valid_move?(board, index)
-    move(board, index, current_player(board))
-    display_board(board)
+  if valid_move?(@board, index)
+    move(board, index, current_player(@board))
+    display_board(@board)
   else
-    turn(board)
+    turn(@board)
   end
 end
 
-def turn_count(board)
+def turn_count
 counter = 0
-board.each do |space|
+@board.each do |space|
 if space == "X" || space == "O" then counter += 1
     end
   end
 counter
 end
 
-def current_player(board)
+def current_player
 player = "X"
-  if turn_count(board) % 2 == 0 then player = "X"
+  if turn_count(@board) % 2 == 0 then player = "X"
   else player = "O"
 end
 player
 end
 
-def won?(board)
+def won?
   WIN_COMBINATIONS.each do |win_combination|
-    if board[win_combination[0]] == "X" && board[win_combination[1]] == "X" && board[win_combination[2]] == "X"
+    if @board[win_combination[0]] == "X" && @board[win_combination[1]] == "X" && @board[win_combination[2]] == "X"
       return win_combination
     elsif
-      board[win_combination[0]] == "O" && board[win_combination[1]] == "O" && board[win_combination[2]] == "O"
+      @board[win_combination[0]] == "O" && @board[win_combination[1]] == "O" && @board[win_combination[2]] == "O"
       return win_combination
     else
       false
@@ -83,30 +83,30 @@ def won?(board)
 end
 
 
-def full?(board)
-  board.none?{|space| space == " "}
+def full?
+  @board.none?{|space| space == " "}
 end
 
-def draw?(board)
-  won?(board) == false && full?(board) == true
+def draw?
+  won?(@board) == false && full?(@board) == true
 end
 
-def over?(board)
-won?(board) || draw?(board)
+def over?
+won?(@board) || draw?(@board)
 end
 
-def winner(board)
-if won?(board) == false then nil else
-win_array = won?(board)
-board[win_array[0]]
+def winner
+if won?(@board) == false then nil else
+win_array = won?(@board)
+@board[win_array[0]]
 end
 end
 
-def play(board)
-  while over?(board) == false
-    turn(board)
+def play
+  while over?(@board) == false
+    turn(@board)
   end
-  if draw?(board) == true then puts "Cat's Game!"
+  if draw?(@board) == true then puts "Cat's Game!"
   else puts "Congratulations #{winner(board)}!"
   end
 end
