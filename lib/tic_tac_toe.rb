@@ -107,7 +107,7 @@ def play
     turn
   end
   if draw? == true then puts "Cat's Game!"
-  else puts "Congratulations #{winner(board)}!"
+  else puts "Congratulations #{winner}!"
   end
 end
 
