@@ -62,7 +62,7 @@ end
 
 def current_player
 player = "X"
-  if turn_count(@board) % 2 == 0 then player = "X"
+  if turn_count % 2 == 0 then player = "X"
   else player = "O"
 end
 player
