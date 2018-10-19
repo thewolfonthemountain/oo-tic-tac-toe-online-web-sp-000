@@ -88,25 +88,25 @@ def full?
 end
 
 def draw?
-  won?(@board) == false && full?(@board) == true
+  won? == false && full? == true
 end
 
 def over?
-won?(@board) || draw?(@board)
+won? || draw?
 end
 
 def winner
-if won?(@board) == false then nil else
-win_array = won?(@board)
+if won? == false then nil else
+win_array = won?
 @board[win_array[0]]
 end
 end
 
 def play
-  while over?(@board) == false
-    turn(@board)
+  while over? == false
+    turn
   end
-  if draw?(@board) == true then puts "Cat's Game!"
+  if draw? == true then puts "Cat's Game!"
   else puts "Congratulations #{winner(board)}!"
   end
 end
